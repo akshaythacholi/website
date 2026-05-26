@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  /* GPU-accelerated smooth scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #1D1D1F;
+  overflow-x: hidden;
+}
+
+/* Clip-reveal utility */
+.clip-hidden { clip-path: inset(100% 0% 0% 0%); }
+.clip-visible { clip-path: inset(0% 0% 0% 0%); }
+
+.divider {
+  width: 3rem;
+  height: 1px;
+  background-color: #1D1D1F;
+  border: none;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* 3D card perspective */
+.perspective { perspective: 1000px; }
+
+/* Italic accent words in headings use Playfair Display */
+h1 em, h2 em, h3 em, h4 em {
+  font-family: var(--font-playfair);
+  font-style: italic;
+}
