@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
@@ -19,19 +19,70 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-
 export const metadata: Metadata = {
   title: "Aiswarya Unni | Career Consultant | Dentist to Corporate",
-  description: "Helping professionals land their dream corporate job. Book a free discovery call today.",
+  description:
+    "Aiswarya Unni helps Indian doctors, dentists and pharmacists transition into high-paying corporate careers in pharma, MedTech and consulting. Book a 30-minute discovery call today.",
   metadataBase: new URL("https://aiswaryaunni.com"),
+  keywords: [
+    "career consultant India",
+    "dentist to corporate",
+    "doctor corporate career India",
+    "pharma career for doctors",
+    "MSL career India",
+    "medical affairs jobs India",
+    "career transition consultant",
+    "clinical to corporate India",
+    "MBBS corporate job",
+    "BDS corporate career",
+    "pharmacist corporate career",
+    "medical science liaison India",
+    "healthcare consulting career",
+    "career coach for doctors India",
+  ],
+  authors: [{ name: "Aiswarya Unni", url: "https://aiswaryaunni.com" }],
+  creator: "Aiswarya Unni",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
-    title: "Aiswarya Unni | Career Consultant",
-    description: "I made the leap. Now I'll help you make yours.",
+    title: "Aiswarya Unni | Career Consultant | Dentist to Corporate",
+    description:
+      "Helping Indian doctors, dentists and pharmacists land high-paying corporate careers in pharma, MedTech and consulting. Book a 30-minute discovery call.",
     url: "https://aiswaryaunni.com",
     siteName: "Aiswarya Unni",
     type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
+    locale: "en_IN",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aiswarya Unni | Career Consultant | Dentist to Corporate",
+    description:
+      "Helping Indian doctors, dentists and pharmacists land high-paying corporate careers in pharma, MedTech and consulting.",
+    creator: "@aiswaryaunni",
+  },
+  formatDetection: { telephone: false, email: false },
+  alternates: {
+    canonical: "https://aiswaryaunni.com",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)",  color: "#1D1D1F" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

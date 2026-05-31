@@ -25,10 +25,10 @@ export default function Testimonials() {
   const featY = useTransform(smooth, [0, 1], ["-5%", "5%"]);
 
   return (
-    <section id="testimonials" ref={ref} className="py-28 md:py-40 bg-white overflow-hidden">
+    <section id="testimonials" ref={ref} className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
-        <div className="overflow-hidden mb-16">
+        <div className="overflow-hidden mb-10">
           <motion.div
             initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
             viewport={VP} transition={{ duration: 1, ease: EASE }}
@@ -43,9 +43,9 @@ export default function Testimonials() {
         </div>
 
         {/* Featured */}
+        <motion.div style={{ y: featY }} className="mb-4">
         <motion.div
-          className="mb-8 bg-ink text-white p-7 md:p-16 relative overflow-hidden"
-          style={{ y: featY }}
+          className="bg-ink text-white p-6 md:p-10 relative overflow-hidden"
           initial={{ opacity: 0, scale: 0.97, y: 60 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={VP}
@@ -53,9 +53,9 @@ export default function Testimonials() {
         >
           <span className="absolute top-4 right-8 font-serif text-[9rem] leading-none text-white/4 select-none pointer-events-none" aria-hidden>&ldquo;</span>
           <div className="relative z-10">
-            <div className="overflow-hidden mb-10">
+            <div className="overflow-hidden mb-6">
               <motion.blockquote
-                className="font-serif text-xl md:text-2xl lg:text-3xl font-semibold italic leading-[1.5] text-white max-w-3xl"
+                className="font-serif text-base md:text-lg lg:text-xl font-semibold italic leading-[1.6] text-white max-w-3xl"
                 initial={{ y: "100%" }} whileInView={{ y: "0%" }}
                 viewport={VP} transition={{ duration: 1, ease: EASE, delay: 0.1 }}
               >
@@ -78,12 +78,13 @@ export default function Testimonials() {
             </div>
           </div>
         </motion.div>
+        </motion.div>
 
         {/* Three cards */}
         <div className="grid md:grid-cols-3 gap-px bg-ink/8 border border-ink/8">
           {testimonials.map((t, i) => (
             <motion.article key={i}
-              className="bg-white p-8 md:p-10 flex flex-col gap-6 hover:bg-accent-light transition-colors duration-500 group"
+              className="bg-white p-6 md:p-8 flex flex-col gap-4 hover:bg-accent-light transition-colors duration-500 group"
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}
@@ -98,11 +99,11 @@ export default function Testimonials() {
                 <p className="font-sans text-sm font-semibold text-ink">{t.name}</p>
                 <p className="font-sans text-xs text-muted mt-0.5">{t.company}</p>
                 <div className="flex items-center gap-2 mt-3 flex-wrap">
-                  <span className="font-sans text-[0.6rem] font-semibold tracking-widest uppercase text-muted bg-ink/5 px-2 py-1">{t.from}</span>
+                  <span className="font-sans text-xs font-semibold tracking-widest uppercase text-muted bg-ink/5 px-2 py-1">{t.from}</span>
                   <motion.span className="text-ink/40 font-bold"
                     animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
                   >→</motion.span>
-                  <span className="font-sans text-[0.6rem] font-semibold tracking-widests uppercase text-ink bg-ink/10 px-2 py-1">{t.to}</span>
+                  <span className="font-sans text-xs font-semibold tracking-widest uppercase text-ink bg-ink/10 px-2 py-1">{t.to}</span>
                 </div>
               </footer>
             </motion.article>

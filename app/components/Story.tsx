@@ -9,31 +9,31 @@ const arc = [
     num: "01",
     stat: "5–6 Years",
     label: "Just to qualify",
-    body: "MBBS, BDS, or Pharma. More time in classrooms than almost any other graduate — while your peers in finance and tech were already earning and growing.",
+    body: "More years in training than almost any other profession. Your peers in tech were already being promoted.",
   },
   {
     num: "02",
     stat: "₹8,000–20,000",
     label: "Average starting salary (per month)",
-    body: "After years of sacrifice, entrance exams, internships, and rotations. A mid-level IT professional at 24 earns more — with far less training.",
+    body: "After entrance exams, internships, rotations. A 24-year-old in IT earns the same — with far less training.",
   },
   {
     num: "03",
     stat: "Stagnant",
     label: "Salary growth in clinical practice",
-    body: "Government hospital pay scales barely move. Private practice earnings plateau quickly. Inflation outpaces increments year after year.",
+    body: "Government scales don't move. Private practice plateaus. Inflation wins every year.",
   },
   {
     num: "04",
     stat: "3× gap",
     label: "Clinical vs corporate pay in pharma",
-    body: "A Medical Science Liaison at Novartis India earns ₹18–25 LPA. A doctor in most clinical settings earns a fraction of that — with twice the hours.",
+    body: "An MSL at Novartis India earns ₹18–25 LPA. Most clinical roles earn a fraction — with twice the hours.",
   },
   {
     num: "05",
     stat: "High",
     label: "Burnout among Indian clinicians",
-    body: "Understaffed hospitals, relentless patient loads, zero work-life balance. Most doctors see the wall long before they're willing to admit it's there.",
+    body: "Understaffed wards, relentless hours, zero balance. The wall is already there.",
   },
 ];
 
@@ -44,11 +44,11 @@ export default function Story() {
   const bgY = useTransform(smooth, [0, 1], ["0%", "5%"]);
 
   return (
-    <section id="story" ref={ref} className="py-28 md:py-40 bg-white overflow-hidden">
+    <section id="story" ref={ref} className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Heading */}
-        <div className="overflow-hidden mb-20">
+        <div className="overflow-hidden mb-12">
           <motion.div
             initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
             viewport={VP} transition={{ duration: 1, ease: EASE }}
@@ -63,11 +63,11 @@ export default function Story() {
         </div>
 
         {/* Arc grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-px bg-ink/8 border border-ink/8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-px bg-ink/8 border border-ink/8 mb-12">
           {arc.map((item, i) => (
             <motion.div
               key={i}
-              className="bg-white p-6 md:p-10 flex flex-col gap-4 group hover:bg-accent-light transition-colors duration-500 relative overflow-hidden"
+              className="bg-white p-4 md:p-10 flex flex-col gap-3 md:gap-4 group hover:bg-accent-light transition-colors duration-500 relative overflow-hidden"
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VP}
@@ -89,12 +89,33 @@ export default function Story() {
                 >{item.stat}</motion.p>
               </div>
 
-              <p className="font-sans text-[0.6rem] font-semibold tracking-widest uppercase text-muted">{item.label}</p>
+              <p className="font-sans text-xs font-semibold tracking-widest uppercase text-muted">{item.label}</p>
               <div className="w-6 h-px bg-ink/20" />
               <p className="font-sans text-xs text-muted leading-[1.85]">{item.body}</p>
             </motion.div>
           ))}
         </div>
+
+        {/* Video */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP} transition={{ duration: 1, ease: EASE }}
+        >
+          <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-muted mb-5">In Her Own Words</p>
+          <div
+            className="relative w-full overflow-hidden"
+            style={{ aspectRatio: "16/9" }}
+          >
+            <iframe
+              src="https://www.youtube.com/embed/8BVyg6jPjzM?rel=0"
+              title="Aiswarya Unni — Career Transition Consultant"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full border-0"
+            />
+          </div>
+        </motion.div>
 
         {/* Contrast statement */}
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
@@ -117,7 +138,7 @@ export default function Story() {
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={VP} transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
             >
-              A pharmacist who joined AstraZeneca India at 26 is now a Medical Science Liaison earning ₹22 LPA. A dentist who moved into a MedTech company three years ago just crossed ₹30 LPA in a commercial role. The path exists. Most clinicians just don&apos;t know how to find it — because nobody in their training ever showed them it was there.
+              A pharmacist who joined AstraZeneca at 26 is now earning ₹22 LPA. A dentist who moved into MedTech three years ago just crossed ₹30 LPA. The path exists — nobody in your training showed it to you.
             </motion.p>
           </motion.div>
 

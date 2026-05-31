@@ -7,25 +7,25 @@ import { EASE, VP } from "../lib/animations";
 const services = [
   {
     num: "01", title: "Resume & CV Coaching", tagline: "Make hiring managers stop scrolling.",
-    desc: "Your clinical CV speaks the wrong language for corporate. We audit every line, unbury the achievements hidden inside clinical language, and reframe them as the leadership, analytical, and commercial wins that corporate hiring managers are trained to look for.",
+    desc: "Your clinical CV speaks the wrong language. We audit every line and reframe your experience into the wins corporate hiring managers actually look for.",
     includes: ["Full CV & cover letter rewrite", "ATS keyword optimisation", "Role-specific tailoring", "LinkedIn alignment", "Unlimited revisions"],
     outcome: "A CV that gets shortlisted at Novartis, Abbott, and AstraZeneca — not rejected in 10 seconds.",
   },
   {
     num: "02", title: "Interview Preparation", tagline: "Turn nerves into presence.",
-    desc: "Competency frameworks, commercial awareness, stakeholder scenarios — these are learnable. We run live mock interviews, record them, and break down exactly what's landing and what's costing you offers.",
+    desc: "Competency frameworks, commercial awareness, stakeholder scenarios — all learnable. Live mock interviews, recorded and broken down so you know exactly what's costing you offers.",
     includes: ["Live mock interviews (video recorded)", "Competency & STAR method coaching", "Commercial awareness preparation", "Managing the 'why are you leaving?' question", "Sector-specific panel prep"],
     outcome: "Walk into pharma and MedTech interviews feeling like you've already done them. Get the offer.",
   },
   {
     num: "03", title: "Corporate Career Strategy", tagline: "A plan you can actually execute.",
-    desc: "We map your transferable skills to real corporate roles, identify the companies most aligned to your experience, and build a 90-day action plan that makes every week feel purposeful.",
+    desc: "We map your skills to real corporate roles, identify the right companies, and build a 90-day plan so every week has a clear purpose.",
     includes: ["Skills audit & corporate role mapping", "Target company research", "Network-building strategy", "90-day action plan", "Weekly accountability check-ins"],
     outcome: "A 90-day roadmap to your first ₹15–25 LPA corporate offer — with every step mapped out.",
   },
   {
     num: "04", title: "LinkedIn Optimisation", tagline: "From invisible to unmissable.",
-    desc: "Recruiters spend fewer than 10 seconds on a profile. We rebuild yours from the headline down — engineering it to attract the exact inbound opportunities you're after.",
+    desc: "Recruiters spend under 10 seconds on a profile. We rebuild yours from headline to experience so pharma and MedTech recruiters find you — not the other way around.",
     includes: ["Full profile audit & rewrite", "Headline & About copywriting", "Experience section transformation", "Keyword strategy for recruiter visibility", "Connection growth tactics"],
     outcome: "Pharma and MedTech recruiters find you on LinkedIn — you stop chasing and start choosing.",
   },
@@ -35,10 +35,10 @@ export default function Services() {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section id="services" className="py-28 md:py-40 bg-white">
+    <section id="services" className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
 
-        <motion.div className="mb-16 overflow-hidden"
+        <motion.div className="mb-10 overflow-hidden"
           initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={VP} transition={{ duration: 1, ease: EASE }}
         >
@@ -92,7 +92,7 @@ export default function Services() {
                 transition={{ duration: 0.6, ease: EASE }}
                 style={{ overflow: "hidden" }}
               >
-                <div className="pb-10 pl-0 md:pl-[calc(2.5rem+2.5rem)] flex flex-col md:flex-row gap-8 md:gap-10">
+                <div className="pb-10 pl-0 md:pl-14 flex flex-col md:flex-row gap-8 md:gap-10">
                   <div className="flex-1">
                     <p className="font-sans text-base text-muted leading-[1.9] mb-6">{s.desc}</p>
                     <ul className="flex flex-col gap-3">
@@ -114,7 +114,7 @@ export default function Services() {
                     animate={{ opacity: expanded === i ? 1 : 0, scale: expanded === i ? 1 : 0.95 }}
                     transition={{ delay: 0.2, duration: 0.5, ease: EASE }}
                   >
-                    <p className="font-sans text-[0.6rem] font-semibold tracking-widest uppercase text-muted mb-2">Outcome</p>
+                    <p className="font-sans text-xs font-semibold tracking-widest uppercase text-muted mb-2">Outcome</p>
                     <p className="font-serif text-base font-bold text-ink leading-snug">{s.outcome}</p>
                   </motion.div>
                 </div>
@@ -123,7 +123,7 @@ export default function Services() {
           ))}
         </div>
 
-        <motion.div className="mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+        <motion.div className="mt-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={VP} transition={{ duration: 0.8, ease: EASE }}
         >
@@ -132,7 +132,7 @@ export default function Services() {
             onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
             className="group relative inline-block overflow-hidden bg-ink text-white font-sans text-xs font-semibold tracking-widest uppercase px-9 py-4 shrink-0"
           >
-            <span className="relative z-10">Book a Free Discovery Call</span>
+            <span className="relative z-10">Book a Discovery Call</span>
             <span className="absolute inset-0 bg-muted translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" />
           </a>
         </motion.div>

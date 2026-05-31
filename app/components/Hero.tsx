@@ -14,11 +14,11 @@ export default function Hero() {
 
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 20 });
 
-  const textY    = useTransform(smoothProgress, [0, 1], ["0%", "30%"]);
+  const textY     = useTransform(smoothProgress, [0, 1], ["0%", "30%"]);
   const textScale = useTransform(smoothProgress, [0, 0.5], [1, 0.94]);
-  const photoY   = useTransform(smoothProgress, [0, 1], ["0%", "20%"]);
+  const photoY    = useTransform(smoothProgress, [0, 1], ["0%", "20%"]);
   const photoScale = useTransform(smoothProgress, [0, 1], [1, 1.08]);
-  const opacity  = useTransform(smoothProgress, [0, 0.5], [1, 0]);
+  const opacity   = useTransform(smoothProgress, [0, 0.5], [1, 0]);
 
   return (
     <section id="hero" ref={ref} className="relative min-h-screen grid md:grid-cols-2 overflow-hidden bg-white">
@@ -26,11 +26,11 @@ export default function Hero() {
       {/* Text */}
       <motion.div
         style={{ y: textY, scale: textScale, opacity }}
-        className="relative z-10 flex flex-col justify-center px-6 md:pl-16 lg:pl-24 pt-36 pb-20 md:pt-28 md:pb-16 order-2 md:order-1 origin-top"
+        className="relative z-10 flex flex-col justify-center px-6 md:pl-16 lg:pl-24 pt-10 pb-16 md:pt-28 md:pb-16 order-2 md:order-1 origin-top"
       >
 
         {/* Word-by-word clip reveal */}
-        <h1 className="font-serif leading-[0.95] mb-6">
+        <h1 className="font-serif leading-[0.95] mb-4">
           <div className="flex flex-wrap gap-x-3 md:gap-x-4 overflow-hidden">
             {words1.map((w, i) => (
               <div key={i} className="overflow-hidden">
@@ -57,9 +57,8 @@ export default function Hero() {
           </div>
         </h1>
 
-        {/* [REPLACE] tagline */}
         <motion.p
-          className="font-sans text-muted text-base md:text-lg leading-[1.8] max-w-[38ch] mb-10 mt-5"
+          className="font-sans text-muted text-base md:text-lg leading-[1.8] max-w-[38ch] mb-10"
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.9, ease: EASE }}
         >
@@ -72,14 +71,14 @@ export default function Hero() {
         >
           <a href="#contact"
             onClick={(e) => { e.preventDefault(); document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="group relative inline-block overflow-hidden bg-ink text-white font-sans text-xs font-semibold tracking-widest uppercase px-9 py-4"
+            className="group relative inline-block overflow-hidden bg-ink text-white font-sans text-xs font-semibold tracking-widest uppercase px-6 md:px-9 py-4"
           >
-            <span className="relative z-10">Book Your Free Discovery Call</span>
+            <span className="relative z-10">Book Your Discovery Call</span>
             <span className="absolute inset-0 bg-muted translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" />
           </a>
           <a href="#story"
             onClick={(e) => { e.preventDefault(); document.querySelector("#story")?.scrollIntoView({ behavior: "smooth" }); }}
-            className="inline-block border border-ink/20 font-sans text-xs font-semibold tracking-widest uppercase px-9 py-4 hover:border-ink hover:bg-ink hover:text-white transition-all duration-500"
+            className="inline-block border border-ink/20 font-sans text-xs font-semibold tracking-widest uppercase px-6 md:px-9 py-4 hover:border-ink hover:bg-ink hover:text-white transition-all duration-500"
           >
             See Real Results
           </a>
@@ -90,16 +89,16 @@ export default function Hero() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          <span className="relative flex h-2 w-2">
+          <span className="relative flex h-2 w-2 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ink opacity-40" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-ink" />
           </span>
           <span className="font-sans text-[0.65rem] font-semibold tracking-widest uppercase text-muted">
-            Career Transition Consultant · Only 3 spots left this month
+            Career Transition Consultant
           </span>
         </motion.div>
 
-        <motion.div className="flex gap-8 mt-10 pt-10 border-t border-ink/10"
+        <motion.div className="flex gap-5 sm:gap-8 mt-10 pt-10 border-t border-ink/10"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           transition={{ delay: 1.6, duration: 0.9 }}
         >
@@ -113,16 +112,15 @@ export default function Hero() {
               transition={{ delay: 1.7 + i * 0.1, duration: 0.7, ease: EASE }}
             >
               <p className="font-serif text-3xl font-extrabold text-ink">{s.n}</p>
-              <p className="font-sans text-[0.6rem] tracking-widest uppercase text-muted mt-0.5">{s.label}</p>
+              <p className="font-sans text-xs tracking-widest uppercase text-muted mt-0.5">{s.label}</p>
             </motion.div>
           ))}
         </motion.div>
       </motion.div>
 
       {/* Photo with parallax zoom */}
-      <div className="relative bg-accent-light order-1 md:order-2 h-64 md:h-auto overflow-hidden">
+      <div className="relative bg-accent-light order-1 md:order-2 h-72 sm:h-96 md:h-auto overflow-hidden">
         <motion.div className="absolute inset-0" style={{ y: photoY, scale: photoScale }}>
-          {/* SWAP: /public/images/hero.jpg */}
           <Image
             src="/images/hero.JPG"
             alt="Aiswarya Unni — Career Transition Consultant"
@@ -139,7 +137,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-16 lg:left-24 md:translate-x-0 flex flex-col items-center gap-2 z-10"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2, duration: 0.8 }}
       >
-        <span className="text-[0.6rem] font-sans font-semibold tracking-[0.2em] uppercase text-muted">Scroll</span>
+        <span className="text-xs font-sans font-semibold tracking-[0.2em] uppercase text-muted">Scroll</span>
         <motion.div className="w-px h-10 bg-ink origin-top"
           animate={{ scaleY: [0, 1, 0], opacity: [0, 1, 0] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}

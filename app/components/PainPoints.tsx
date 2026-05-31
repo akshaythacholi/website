@@ -1,57 +1,44 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef } from "react";
 import { EASE, VP } from "../lib/animations";
 
 const pains = [
-  { num: "01", heading: "You've hit an invisible ceiling.", body: "You're good at what you do. Excellent, even. But clinical excellence doesn't translate into advancement anymore — and you can feel the walls closing in." },
-  { num: "02", heading: "You're watching others step into rooms you should be in.", body: "You see colleagues move into pharmaceutical companies, consulting firms, corporate strategy roles. You think: I could do that. But you don't know where to start." },
-  { num: "03", heading: "Your CV doesn't tell your real story.", body: "Late nights rewriting it. Trying to make clinical experience sound corporate. You know your background is valuable — but not how to speak the language hiring managers respond to." },
-  { num: "04", heading: "You're afraid to start over — but more afraid to stay.", body: "Leaving everything you trained for feels like failure. But staying feels like slow erosion. You're caught between the safety of what you know and the pull of what you want." },
+  {
+    num: "01",
+    code: "Invisible Ceiling Syndrome",
+    heading: "You've hit an invisible ceiling.",
+    body: "Clinical excellence stopped translating into advancement. You can feel the walls closing in — but nobody talks about it.",
+  },
+  {
+    num: "02",
+    code: "Peer Displacement Anxiety",
+    heading: "Your peers are in rooms you should be in.",
+    body: "Colleagues are at pharma companies, consulting firms, corporate roles. You know you could do it. You just don't know how to start.",
+  },
+  {
+    num: "03",
+    code: "CV Translation Deficit",
+    heading: "Your CV is speaking the wrong language.",
+    body: "You know your background is valuable. The problem is translating it into words that corporate hiring managers respond to.",
+  },
+  {
+    num: "04",
+    code: "Transition Paralysis",
+    heading: "You're afraid to start over — but more afraid to stay.",
+    body: "Leaving feels like failure. Staying feels like slow erosion. You're stuck between the safety of what you know and the pull of what you want.",
+  },
 ];
 
-const SLIDE_DURATION = 4000; // ms each card is shown
-
-const variants = {
-  enter: { x: "100%", opacity: 0 },
-  center: { x: "0%", opacity: 1 },
-  exit: { x: "-100%", opacity: 0 },
-};
-
 export default function PainPoints() {
-  const [current, setCurrent] = useState(0);
-  const [paused, setPaused]   = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start end", "end start"] });
   const smooth = useSpring(scrollYProgress, { stiffness: 60, damping: 18 });
   const bgY = useTransform(smooth, [0, 1], ["0%", "6%"]);
 
-  const advance = useCallback(() => {
-    setCurrent((c) => (c + 1) % pains.length);
-  }, []);
-
-  useEffect(() => {
-    if (paused) return;
-    timerRef.current = setTimeout(advance, SLIDE_DURATION);
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, [current, paused, advance]);
-
-  const pause  = () => {
-    setPaused(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-  };
-  const resume = () => setPaused(false);
-
-  const goTo = (i: number) => {
-    setCurrent(i);
-    setPaused(false);
-  };
-
   return (
-    <section id="pain" ref={sectionRef} data-theme="dark" className="py-28 md:py-40 text-white overflow-hidden relative" style={{ backgroundColor: "#111111" }}>
+    <section id="pain" ref={sectionRef} data-theme="dark" className="py-16 md:py-24 text-white overflow-hidden relative" style={{ backgroundColor: "#111111" }}>
       <motion.div className="absolute inset-0 opacity-[0.03]" style={{ y: bgY }} aria-hidden>
         <div className="absolute top-0 left-0 right-0 h-px bg-white" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white" />
@@ -60,12 +47,12 @@ export default function PainPoints() {
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
         {/* Heading */}
-        <div className="overflow-hidden mb-16 md:mb-20">
+        <div className="overflow-hidden mb-10 md:mb-14">
           <motion.div
             initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
             viewport={VP} transition={{ duration: 1, ease: EASE }}
           >
-            <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-muted mb-5">Does This Sound Familiar?</p>
+            <p className="text-xs font-sans font-semibold tracking-[0.25em] uppercase text-muted mb-4">Does This Sound Familiar?</p>
             <div className="divider mb-7 bg-white/30" />
             <h2 className="font-serif text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[0.95] text-white max-w-3xl">
               You didn&apos;t spend years studying to feel{" "}
@@ -74,103 +61,94 @@ export default function PainPoints() {
           </motion.div>
         </div>
 
-        {/* Carousel */}
-        <div
-          className="relative overflow-hidden border border-white/10 cursor-default"
-          onMouseEnter={pause}
-          onMouseLeave={resume}
+        {/* Medical assessment card */}
+        <motion.div
+          className="bg-white overflow-hidden"
+          initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={VP} transition={{ duration: 1, ease: EASE }}
+          style={{ boxShadow: "0 32px 80px rgba(0,0,0,0.55)" }}
         >
-          {/* Watermark number */}
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={`num-${current}`}
-              aria-hidden
-              className="absolute inset-0 flex items-center justify-center font-serif font-extrabold text-white select-none pointer-events-none"
-              style={{ fontSize: "clamp(8rem, 28vw, 22rem)", opacity: 0.03, lineHeight: 1 }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.03 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              {pains[current].num}
-            </motion.span>
-          </AnimatePresence>
-
-          {/* Card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.65, ease: EASE }}
-              className="relative z-10 p-10 md:p-16 lg:p-20 min-h-[320px] md:min-h-[360px] flex flex-col justify-center"
-            >
-              <p className="font-sans text-xs font-semibold tracking-[0.3em] uppercase text-white/25 mb-6">
-                {pains[current].num} / 0{pains.length}
-              </p>
-              <h3 className="font-serif text-2xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6 max-w-3xl">
-                {pains[current].heading}
-              </h3>
-              <p className="font-sans text-sm md:text-base text-white/50 leading-[1.9] max-w-2xl">
-                {pains[current].body}
-              </p>
-            </motion.div>
-          </AnimatePresence>
-
-          {/* Progress bar */}
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10">
-            <AnimatePresence mode="wait">
-              {!paused && (
-                <motion.div
-                  key={current}
-                  className="h-full bg-white/60 origin-left"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  exit={{ scaleX: 1, opacity: 0 }}
-                  transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
-                />
-              )}
-            </AnimatePresence>
+          {/* Card header */}
+          <div className="px-6 md:px-10 py-4 border-b border-ink/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2" style={{ background: "#f8f8f6" }}>
+            <div>
+              <p className="font-sans text-[0.58rem] font-bold tracking-[0.3em] uppercase text-ink/40">Clinical Assessment Report</p>
+              <p className="font-sans text-[0.58rem] tracking-[0.1em] uppercase text-ink/25 mt-0.5">Ref: CAR-2025-IN &nbsp;·&nbsp; Aiswarya Unni Consulting</p>
+            </div>
+            <div className="sm:text-right">
+              <p className="font-sans text-[0.58rem] font-bold tracking-[0.2em] uppercase text-ink/35">Patient Profile</p>
+              <p className="font-sans text-[0.58rem] text-ink/25 mt-0.5">Medical Professional, India</p>
+            </div>
           </div>
 
-          {/* Pause hint */}
-          {paused && (
-            <motion.div
-              className="absolute top-4 right-5 flex items-center gap-2"
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            >
-              <span className="w-1 h-3.5 bg-white/30 rounded-sm" />
-              <span className="w-1 h-3.5 bg-white/30 rounded-sm" />
-            </motion.div>
-          )}
-        </div>
+          {/* Findings */}
+          <div className="px-6 md:px-10 pt-6 md:pt-8 pb-4">
+            <p className="font-sans text-[0.55rem] font-bold tracking-[0.35em] uppercase text-ink/30 mb-5">Presenting Complaints</p>
 
-        {/* Dot navigation */}
-        <div className="flex items-center justify-center gap-3 mt-8">
-          {pains.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              aria-label={`Go to slide ${i + 1}`}
-              className="group relative h-8 flex items-center"
-            >
-              <motion.span
-                className="block rounded-full bg-white transition-all duration-300"
-                animate={{
-                  width:   current === i ? "2rem" : "0.375rem",
-                  height:  "0.375rem",
-                  opacity: current === i ? 1 : 0.25,
-                }}
-                transition={{ duration: 0.3, ease: EASE }}
-              />
-            </button>
-          ))}
-        </div>
+            <div className="flex flex-col gap-5 md:gap-6">
+              {pains.map((pain, i) => (
+                <motion.div
+                  key={i}
+                  className="flex gap-4 items-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={VP}
+                  transition={{ duration: 0.6, ease: EASE, delay: 0.1 + i * 0.1 }}
+                >
+                  {/* Warning badge */}
+                  <div
+                    className="shrink-0 w-7 h-7 flex items-center justify-center mt-0.5"
+                    style={{ background: "#FFF3F3", border: "1.5px solid #FFCDD2", borderRadius: 4 }}
+                  >
+                    <span style={{ color: "#C62828", fontSize: "0.7rem" }}>⚠</span>
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-3 mb-1.5">
+                      <div className="min-w-0">
+                        <span className="font-sans text-[0.55rem] font-bold tracking-[0.25em] uppercase text-ink/30 mr-2">[{pain.num}]</span>
+                        <span className="font-sans text-[0.6rem] font-bold tracking-[0.15em] uppercase text-ink/50">{pain.code}</span>
+                      </div>
+                      <span
+                        className="shrink-0 font-sans text-[0.5rem] font-bold tracking-widest uppercase px-2 py-0.5 mt-0.5"
+                        style={{ background: "#FFF3F3", color: "#C62828", borderRadius: 2 }}
+                      >
+                        Active
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-base md:text-lg font-bold text-ink leading-snug mb-1">{pain.heading}</h3>
+                    <p className="font-sans text-xs text-ink/50 leading-relaxed">{pain.body}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Assessment footer */}
+          <motion.div
+            className="mx-6 md:mx-10 mt-5 mb-6 md:mb-8 pt-5 border-t border-ink/10"
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+            viewport={VP} transition={{ delay: 0.5, duration: 0.8 }}
+          >
+            <p className="font-sans text-[0.55rem] font-bold tracking-[0.35em] uppercase text-ink/30 mb-4">Clinical Assessment</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <p className="font-sans text-[0.52rem] font-semibold tracking-widest uppercase text-ink/25 mb-1">Diagnosis</p>
+                <p className="font-serif text-sm font-bold text-ink leading-snug">Career Stagnation Syndrome</p>
+              </div>
+              <div>
+                <p className="font-sans text-[0.52rem] font-semibold tracking-widest uppercase text-ink/25 mb-1">Prognosis</p>
+                <p className="font-serif text-sm font-bold leading-snug" style={{ color: "#15803d" }}>Excellent</p>
+              </div>
+              <div>
+                <p className="font-sans text-[0.52rem] font-semibold tracking-widest uppercase text-ink/25 mb-1">Recommended Rx</p>
+                <p className="font-serif text-sm font-bold text-ink leading-snug">Corporate Transition Programme</p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom quote */}
-        <motion.div className="mt-20 md:mt-24 text-center"
+        <motion.div className="mt-12 md:mt-16 text-center"
           initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={VP} transition={{ duration: 0.9, ease: EASE }}
         >

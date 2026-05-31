@@ -4,14 +4,20 @@
 
 html {
   scroll-behavior: smooth;
-  /* GPU-accelerated smooth scrolling */
-  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   background-color: #FFFFFF;
   color: #1D1D1F;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent double-tap zoom delay on interactive elements */
+button, a, [role="button"] {
+  touch-action: manipulation;
 }
 
 /* Clip-reveal utility */
@@ -35,4 +41,9 @@ body {
 h1 em, h2 em, h3 em, h4 em {
   font-family: var(--font-playfair);
   font-style: italic;
+}
+
+@keyframes ticker-up {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }

@@ -5,9 +5,9 @@ import { useRef } from "react";
 import { EASE, VP } from "../lib/animations";
 
 const steps = [
-  { num: "01", title: "Apply", sub: "5 minutes. No commitment.", desc: "Fill in the short form below — your current situation, where you want to go, and why now. I read every submission personally. No filters. Just me.", detail: "Within 48 hours, you'll hear back directly with either a booking link or honest feedback on fit." },
-  { num: "02", title: "Consult", sub: "30 minutes. Completely free.", desc: "We meet on a video call with one goal: clarity. I'll ask the questions most people haven't been asked before — about what you actually want and what's held you back.", detail: "No pitch. No pressure. By the end you'll know whether working together makes sense." },
-  { num: "03", title: "Land the Job", sub: "Tailored strategy. Real execution.", desc: "We start working. Every session is built around your specific targets and blockers. Week by week, your strategy sharpens, confidence builds, and the doors start opening.", detail: "Most clients have their first interview invitation within 3–6 weeks. Many have offers within 90 days." },
+  { num: "01", title: "Apply", sub: "5 minutes. No commitment.", desc: "Fill in the short form — your situation, your goal. I read every submission personally.", detail: "Within 48 hours: a booking link or honest feedback on fit." },
+  { num: "02", title: "Consult", sub: "30 minutes. No commitment.", desc: "One video call. One goal — clarity on what you want and what's held you back.", detail: "No pitch. No pressure. You'll know by the end if this is right for you." },
+  { num: "03", title: "Land the Job", sub: "Tailored strategy. Real execution.", desc: "Every session targets your specific blockers. Week by week the strategy sharpens and doors open.", detail: "First interview typically within 3–6 weeks. Offers within 90 days." },
 ];
 
 export default function HowItWorks() {
@@ -18,7 +18,7 @@ export default function HowItWorks() {
   const bgY = useTransform(smooth, [0, 1], ["0%", "8%"]);
 
   return (
-    <section id="process" ref={ref} data-theme="dark" className="py-28 md:py-40 text-white overflow-hidden relative" style={{ backgroundColor: "#111111" }}>
+    <section id="process" ref={ref} data-theme="dark" className="py-16 md:py-24 text-white overflow-hidden relative" style={{ backgroundColor: "#111111" }}>
       <motion.div className="absolute inset-0 opacity-[0.025]" style={{ y: bgY }} aria-hidden>
         <div className="absolute top-0 left-0 right-0 h-px bg-white" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-white" />
@@ -26,7 +26,7 @@ export default function HowItWorks() {
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
 
-        <div className="mb-20 overflow-hidden">
+        <div className="mb-12 overflow-hidden">
           <motion.div
             initial={{ y: 80, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
             viewport={VP} transition={{ duration: 1, ease: EASE }}
@@ -63,7 +63,7 @@ export default function HowItWorks() {
                 transition={{ duration: 0.9, ease: EASE, delay: i * 0.18 }}
               >
                 <motion.span
-                  className="font-serif text-8xl font-extrabold leading-none text-white/8"
+                  className="font-serif text-6xl md:text-8xl font-extrabold leading-none text-white/8"
                   whileInView={{ opacity: [0.08, 0.18, 0.08] }}
                   transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.6 }}
                 >{s.num}</motion.span>
@@ -94,7 +94,7 @@ export default function HowItWorks() {
         </div>
 
         <motion.div
-          className="mt-16 md:mt-20 p-6 md:p-10 border border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8"
+          className="mt-10 md:mt-14 p-6 md:p-10 border border-white/10 flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8"
           initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={VP} transition={{ duration: 0.9, ease: EASE }}
         >
@@ -111,7 +111,7 @@ export default function HowItWorks() {
               initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
               viewport={VP} transition={{ delay: 0.2, duration: 0.7 }}
             >
-              I only take on clients I genuinely believe I can help. If I&apos;m not the right fit, I&apos;ll tell you — and point you toward something that is. No hard sell. Ever.
+              If I can&apos;t genuinely help you, I&apos;ll say so on the call — and point you to something that will. No hard sell. Ever.
             </motion.p>
           </div>
           <motion.a href="#contact"
@@ -120,7 +120,7 @@ export default function HowItWorks() {
             initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}
             viewport={VP} transition={{ delay: 0.3, duration: 0.8, ease: EASE }}
           >
-            <span className="relative z-10 group-hover:text-white transition-colors duration-500">Start With a Free Call</span>
+            <span className="relative z-10 group-hover:text-white transition-colors duration-500">Start With a Discovery Call</span>
             <span className="absolute inset-0 bg-muted translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]" />
           </motion.a>
         </motion.div>
